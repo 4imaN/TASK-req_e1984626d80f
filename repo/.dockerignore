@@ -1,0 +1,12 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.coverage
+htmlcov
+.git
+.gitignore
+data/
+secrets/
+*.sqlite3
+.env

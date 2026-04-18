@@ -1,0 +1,27 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["src/trailgoods"]
+concurrency = ["thread", "greenlet"]
+sigterm = true
+omit = [
+    "*/migrations/*",
+    "alembic/*",
+    "scripts/*",
+    "src/trailgoods/worker.py",
+    "src/trailgoods/core/database.py",
+]
+
+[tool.coverage.report]
+fail_under = 88
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__",
+    "if TYPE_CHECKING",
+]

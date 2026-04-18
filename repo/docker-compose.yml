@@ -1,0 +1,110 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: trailgoods
+      POSTGRES_PASSWORD: trailgoods
+      POSTGRES_DB: trailgoods
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trailgoods"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["/app/docker/api-entrypoint.sh"]
+    command: ["uvicorn", "src.trailgoods.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trailgoods:trailgoods@postgres:5432/trailgoods
+      DATABASE_URL_SYNC: postgresql+psycopg://trailgoods:trailgoods@postgres:5432/trailgoods
+      SECRET_KEY: dev-secret-key-change-in-production-64chars-minimum-recommended
+      ENCRYPTION_MASTER_KEY_FILE: /app/secrets/master.key
+      ASSET_STORAGE_ROOT: /data/assets
+      BACKUP_STORAGE_ROOT: /data/backups
+      PREVIEW_STORAGE_ROOT: /data/previews
+      LOG_LEVEL: INFO
+    volumes:
+      - secrets_data:/app/secrets
+      - asset_data:/data/assets
+      - backup_data:/data/backups
+      - preview_data:/data/previews
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 15s
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["/app/docker/worker-entrypoint.sh"]
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trailgoods:trailgoods@postgres:5432/trailgoods
+      DATABASE_URL_SYNC: postgresql+psycopg://trailgoods:trailgoods@postgres:5432/trailgoods
+      SECRET_KEY: dev-secret-key-change-in-production-64chars-minimum-recommended
+      ENCRYPTION_MASTER_KEY_FILE: /app/secrets/master.key
+      ASSET_STORAGE_ROOT: /data/assets
+      BACKUP_STORAGE_ROOT: /data/backups
+      PREVIEW_STORAGE_ROOT: /data/previews
+      LOG_LEVEL: INFO
+      WORKER_POLL_INTERVAL_SECONDS: 5
+    volumes:
+      - secrets_data:/app/secrets
+      - asset_data:/data/assets
+      - backup_data:/data/backups
+      - preview_data:/data/previews
+    depends_on:
+      api:
+        condition: service_healthy
+
+  postgres-test:
+    image: postgres:16-alpine
+    profiles: ["test"]
+    environment:
+      POSTGRES_USER: trailgoods
+      POSTGRES_PASSWORD: trailgoods
+      POSTGRES_DB: trailgoods_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trailgoods"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+
+  test:
+    profiles: ["test"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["/app/docker/test-entrypoint.sh"]
+    environment:
+      DATABASE_URL: postgresql+asyncpg://trailgoods:trailgoods@postgres-test:5432/trailgoods_test
+      DATABASE_URL_SYNC: postgresql+psycopg://trailgoods:trailgoods@postgres-test:5432/trailgoods_test
+      SECRET_KEY: test-secret-key
+      ENCRYPTION_MASTER_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+      ASSET_STORAGE_ROOT: /tmp/trailgoods_test_assets
+      BACKUP_STORAGE_ROOT: /tmp/trailgoods_test_backups
+      PREVIEW_STORAGE_ROOT: /tmp/trailgoods_test_previews
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  secrets_data:
+  asset_data:
+  backup_data:
+  preview_data:
