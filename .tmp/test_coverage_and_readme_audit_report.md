@@ -103,95 +103,94 @@ put /api/v1/assets/uploads/{*}/parts/{*}
 - Test transport: ASGI transport in-process (`ASGITransport(app=app)`), real routing/middleware/handlers executed.
 
 ### Mapping (`endpoint | covered | evidence`)
-```text
-delete /api/v1/admin/sensitive-words/{*}|yes|tests/api/v1/test_endpoint_coverage.py:274:        delete_resp = await client.delete(
-delete /api/v1/assets/{*}|yes|tests/api/v1/test_assets.py:209:        resp = await client.delete(
-delete /api/v1/items/{*}/attributes/{*}|yes|tests/api/v1/test_regressions.py:234:        del_r = await client.delete(
-delete /api/v1/items/{*}/tags/{*}|yes|tests/api/v1/test_additions.py:50:        del_resp = await client.delete(
-delete /api/v1/sessions/{*}|yes|tests/api/v1/test_auth.py:234:        resp = await client.delete(
-delete /api/v1/share-links/{*}|yes|tests/api/v1/test_endpoint_coverage.py:127:        disable_resp = await client.delete(
-get /api/v1/admin/audit-logs|yes|tests/api/v1/test_audit_fixes.py:19:    resp = await client.get(
-get /api/v1/admin/identity-bindings/{*}|yes|tests/api/v1/test_audit_fixes.py:369:        resp = await client.get(
-get /api/v1/admin/reorder-alerts|yes|tests/api/v1/test_inventory.py:367:        resp = await client.get("/api/v1/admin/reorder-alerts", headers=auth_header(admin_token))
-get /api/v1/admin/sensitive-words|yes|tests/api/v1/test_endpoint_coverage.py:306:        list_resp = await client.get(
-get /api/v1/appeals|yes|tests/api/v1/test_endpoint_coverage.py:381:        list_resp = await client.get("/api/v1/appeals", headers=auth_header(reviewer_token))
-get /api/v1/assets/{*}|yes|tests/api/v1/test_audit_fixes.py:84:        resp = await client.get(
-get /api/v1/catalog/items|yes|tests/api/v1/test_coverage.py:209:        r = await client.get("/api/v1/catalog/items", params={"sort_by": "title_asc"})
-get /api/v1/categories|yes|tests/api/v1/test_catalog.py:94:        resp = await client.get("/api/v1/categories")
-get /api/v1/identity-bindings|yes|tests/api/v1/test_audit_fixes.py:114:        resp = await client.get(
-get /api/v1/inventory/balances|yes|tests/api/v1/test_inventory.py:130:        bal_resp = await client.get("/api/v1/inventory/balances", headers=auth_header(admin_token), params={
-get /api/v1/items/{*}|yes|tests/api/v1/test_security.py:287:        resp = await client.get(
-get /api/v1/items/{*}/attributes|yes|tests/api/v1/test_regressions.py:230:        list_r = await client.get(f"/api/v1/items/{item['id']}/attributes", headers=auth_header(admin_token))
-get /api/v1/items/{*}/reviews|yes|tests/api/v1/test_reviews.py:125:        resp = await client.get(f"/api/v1/items/{item['id']}/reviews")
-get /api/v1/reports|yes|tests/api/v1/test_coverage.py:1277:        resp = await client.get("/api/v1/reports", headers=auth_header(reviewer_token))
-get /api/v1/reservations|yes|tests/api/v1/test_audit_fixes.py:129:        resp = await client.get(
-get /api/v1/sessions/me|yes|tests/api/v1/test_auth.py:131:        resp2 = await client.get(
-get /api/v1/share-links/{*}|yes|tests/api/v1/test_audit_fixes.py:256:        resp_no = await client.get(f"/api/v1/share-links/{token}")
-get /api/v1/share-links/{*}/download|yes|tests/api/v1/test_audit_fixes.py:308:        resp_no = await client.get(f"/api/v1/share-links/{token}/download")
-get /api/v1/tags|yes|tests/api/v1/test_catalog.py:112:        resp = await client.get("/api/v1/tags")
-get /api/v1/verification-cases|yes|tests/api/v1/test_endpoint_coverage.py:412:        list_resp = await client.get(
-get /api/v1/verification-cases/{*}|yes|tests/api/v1/test_verification.py:249:        resp = await client.get(
-get /api/v1/verification-cases/{*}/status|yes|tests/api/v1/test_verification.py:296:        resp = await client.get(
-get /api/v1/warehouses|yes|tests/api/v1/test_inventory.py:109:        resp = await client.get("/api/v1/warehouses", headers=auth_header(admin_token))
-patch /api/v1/items/{*}|yes|tests/api/v1/test_catalog.py:203:        resp2 = await client.patch(f"/api/v1/items/{item['id']}", headers=auth_header(admin_token), json={
-patch /api/v1/reviews/{*}|yes|tests/api/v1/test_reviews.py:147:        edit_resp = await client.patch(
-patch /api/v1/skus/{*}|yes|tests/api/v1/test_coverage.py:173:        r = await client.patch(f"/api/v1/skus/{sku['id']}", headers=auth_header(admin_token), json={
-patch /api/v1/verification-cases/{*}|yes|tests/api/v1/test_verification.py:29:    resp = await client.patch(
-post /api/v1/admin/clear-challenge|yes|tests/api/v1/test_endpoint_coverage.py:82:        clear_resp = await client.post(
-post /api/v1/admin/force-logout|yes|tests/api/v1/test_auth.py:449:        resp = await client.post(
-post /api/v1/admin/roles/assign|yes|tests/api/v1/test_audit_fixes.py:172:        await client.post(
-post /api/v1/admin/sensitive-words|yes|tests/api/v1/test_reviews.py:53:        sw_resp = await client.post(
-post /api/v1/appeals|yes|tests/api/v1/test_security.py:569:        resp = await client.post(
-post /api/v1/appeals/{*}/decision|yes|tests/api/v1/test_reviews.py:311:        decide_resp = await client.post(
-post /api/v1/assets/uploads|yes|tests/api/v1/test_audit_fixes.py:49:        resp = await client.post("/api/v1/assets/uploads", headers=auth_header(token), json={
-post /api/v1/assets/uploads/batch-complete|yes|tests/api/v1/test_assets.py:154:        resp = await client.post("/api/v1/assets/uploads/batch-complete", headers=headers, json={
-post /api/v1/assets/uploads/{*}/complete|yes|tests/api/v1/test_assets.py:111:        resp4 = await client.post(
-post /api/v1/assets/{*}/share-links|yes|tests/api/v1/test_audit_fixes.py:247:        resp = await client.post(
-post /api/v1/auth/login|yes|tests/conftest.py:145:    resp = await client.post("/api/v1/auth/login", json={
-post /api/v1/auth/logout|yes|tests/api/v1/test_auth.py:125:        resp = await client.post(
-post /api/v1/auth/logout-all|yes|tests/api/v1/test_auth.py:142:        resp = await client.post(
-post /api/v1/auth/password-rotate|yes|tests/api/v1/test_auth.py:166:        resp = await client.post(
-post /api/v1/auth/register|yes|tests/conftest.py:136:    resp = await client.post("/api/v1/auth/register", json={
-post /api/v1/categories|yes|tests/api/v1/test_additions.py:21:        cat_resp = await client.post("/api/v1/categories", headers=auth_header(admin_token), json={
-post /api/v1/identity-bindings|yes|tests/api/v1/test_audit_fixes.py:103:        await client.post(
-post /api/v1/inbound-docs|yes|tests/api/v1/test_security.py:71:    doc_resp = await client.post("/api/v1/inbound-docs", headers=auth_header(admin_token), json={
-post /api/v1/inbound-docs/{*}/lines|yes|tests/api/v1/test_security.py:75:    await client.post(f"/api/v1/inbound-docs/{doc['id']}/lines", headers=auth_header(admin_token), json={
-post /api/v1/inbound-docs/{*}/post|yes|tests/api/v1/test_security.py:78:    await client.post(f"/api/v1/inbound-docs/{doc['id']}/post", headers=auth_header(admin_token))
-post /api/v1/items|yes|tests/api/v1/test_security.py:28:    item_resp = await client.post("/api/v1/items", headers=auth_header(admin_token), json={
-post /api/v1/items/{*}/attributes|yes|tests/api/v1/test_regressions.py:221:        attr_r = await client.post(
-post /api/v1/items/{*}/media|yes|tests/api/v1/test_reviews.py:30:    await client.post(f"/api/v1/items/{item['id']}/media", headers=auth_header(admin_token), json={
-post /api/v1/items/{*}/publish|yes|tests/api/v1/test_security.py:69:    await client.post(f"/api/v1/items/{item['id']}/publish", headers=auth_header(admin_token))
-post /api/v1/items/{*}/reviews|yes|tests/api/v1/test_security.py:485:        resp = await client.post(
-post /api/v1/items/{*}/tags/{*}|yes|tests/api/v1/test_additions.py:37:        add_resp = await client.post(
-post /api/v1/items/{*}/unpublish|yes|tests/api/v1/test_catalog.py:322:        resp = await client.post(
-post /api/v1/orders|yes|tests/api/v1/test_security.py:84:    resp = await client.post("/api/v1/orders", headers=auth_header(token), json={
-post /api/v1/orders/{*}/cancel|yes|tests/api/v1/test_inventory.py:298:        cancel_resp = await client.post(
-post /api/v1/orders/{*}/deduct|yes|tests/api/v1/test_security.py:133:        resp = await client.post(
-post /api/v1/orders/{*}/reserve|yes|tests/api/v1/test_security.py:110:        resp = await client.post(
-post /api/v1/outbound-docs|yes|tests/api/v1/test_coverage_boost.py:291:        resp = await client.post("/api/v1/outbound-docs", headers=auth_header(admin_token), json={
-post /api/v1/outbound-docs/{*}/lines|yes|tests/api/v1/test_coverage.py:323:        line_r = await client.post(f"/api/v1/outbound-docs/{ob['id']}/lines", headers=auth_header(admin_token), json={
-post /api/v1/outbound-docs/{*}/post|yes|tests/api/v1/test_coverage.py:328:        post_r = await client.post(f"/api/v1/outbound-docs/{ob['id']}/post", headers=auth_header(admin_token))
-post /api/v1/price-books|yes|tests/api/v1/test_security.py:48:    pb_resp = await client.post("/api/v1/price-books", headers=auth_header(admin_token), json={
-post /api/v1/price-books/{*}/entries|yes|tests/api/v1/test_reviews.py:39:    await client.post(f"/api/v1/price-books/{pb['id']}/entries", headers=auth_header(admin_token), json={
-post /api/v1/reports|yes|tests/api/v1/test_reviews.py:245:        report_resp = await client.post(
-post /api/v1/reports/{*}/close|yes|tests/api/v1/test_coverage_boost.py:413:        close_resp = await client.post(
-post /api/v1/reports/{*}/triage|yes|tests/api/v1/test_reviews.py:261:        triage_resp = await client.post(
-post /api/v1/reviews/{*}/moderate|yes|tests/api/v1/test_reviews.py:198:        suppress_resp = await client.post(
-post /api/v1/spus|yes|tests/api/v1/test_inventory.py:33:    spu_resp = await client.post("/api/v1/spus", headers=auth_header(admin_token), json={
-post /api/v1/spus/{*}/skus|yes|tests/api/v1/test_security.py:43:    sku_resp = await client.post(f"/api/v1/spus/{spu['id']}/skus", headers=auth_header(admin_token), json={
-post /api/v1/stocktakes|yes|tests/api/v1/test_inventory.py:322:        st_resp = await client.post("/api/v1/stocktakes", headers=auth_header(admin_token), json={
-post /api/v1/stocktakes/{*}/lines|yes|tests/api/v1/test_inventory.py:328:        line_resp = await client.post(f"/api/v1/stocktakes/{st['id']}/lines", headers=auth_header(admin_token), json={
-post /api/v1/stocktakes/{*}/post|yes|tests/api/v1/test_inventory.py:337:        post_resp = await client.post(f"/api/v1/stocktakes/{st['id']}/post", headers=auth_header(admin_token))
-post /api/v1/tags|yes|tests/api/v1/test_additions.py:26:        tag_resp = await client.post("/api/v1/tags", headers=auth_header(admin_token), json={
-post /api/v1/verification-cases|yes|tests/api/v1/test_verification.py:17:    resp = await client.post(
-post /api/v1/verification-cases/{*}/decision|yes|tests/api/v1/test_verification.py:168:        resp = await client.post(
-post /api/v1/verification-cases/{*}/renew|yes|tests/api/v1/test_coverage.py:623:        r = await client.post(
-post /api/v1/verification-cases/{*}/submit|yes|tests/api/v1/test_verification.py:43:    resp2 = await client.post(
-post /api/v1/verification-cases/{*}/withdraw|yes|tests/api/v1/test_verification.py:284:        resp = await client.post(
-post /api/v1/warehouses|yes|tests/api/v1/test_security.py:16:    wh_resp = await client.post("/api/v1/warehouses", headers=auth_header(admin_token), json={
-put /api/v1/assets/uploads/{*}/parts/{*}|yes|tests/api/v1/test_audit_fixes.py:61:        resp2 = await client.put(
-```
-
+| Endpoint | Covered | Evidence |
+|---|---|---|
+| `delete /api/v1/admin/sensitive-words/{*}` | yes | `tests/api/v1/test_endpoint_coverage.py:274:        delete_resp = await client.delete(` |
+| `delete /api/v1/assets/{*}` | yes | `tests/api/v1/test_assets.py:209:        resp = await client.delete(` |
+| `delete /api/v1/items/{*}/attributes/{*}` | yes | `tests/api/v1/test_regressions.py:234:        del_r = await client.delete(` |
+| `delete /api/v1/items/{*}/tags/{*}` | yes | `tests/api/v1/test_additions.py:50:        del_resp = await client.delete(` |
+| `delete /api/v1/sessions/{*}` | yes | `tests/api/v1/test_auth.py:234:        resp = await client.delete(` |
+| `delete /api/v1/share-links/{*}` | yes | `tests/api/v1/test_endpoint_coverage.py:127:        disable_resp = await client.delete(` |
+| `get /api/v1/admin/audit-logs` | yes | `tests/api/v1/test_audit_fixes.py:19:    resp = await client.get(` |
+| `get /api/v1/admin/identity-bindings/{*}` | yes | `tests/api/v1/test_audit_fixes.py:369:        resp = await client.get(` |
+| `get /api/v1/admin/reorder-alerts` | yes | `tests/api/v1/test_inventory.py:367:        resp = await client.get("/api/v1/admin/reorder-alerts", headers=auth_header(admin_token))` |
+| `get /api/v1/admin/sensitive-words` | yes | `tests/api/v1/test_endpoint_coverage.py:306:        list_resp = await client.get(` |
+| `get /api/v1/appeals` | yes | `tests/api/v1/test_endpoint_coverage.py:381:        list_resp = await client.get("/api/v1/appeals", headers=auth_header(reviewer_token))` |
+| `get /api/v1/assets/{*}` | yes | `tests/api/v1/test_audit_fixes.py:84:        resp = await client.get(` |
+| `get /api/v1/catalog/items` | yes | `tests/api/v1/test_coverage.py:209:        r = await client.get("/api/v1/catalog/items", params={"sort_by": "title_asc"})` |
+| `get /api/v1/categories` | yes | `tests/api/v1/test_catalog.py:94:        resp = await client.get("/api/v1/categories")` |
+| `get /api/v1/identity-bindings` | yes | `tests/api/v1/test_audit_fixes.py:114:        resp = await client.get(` |
+| `get /api/v1/inventory/balances` | yes | `tests/api/v1/test_inventory.py:130:        bal_resp = await client.get("/api/v1/inventory/balances", headers=auth_header(admin_token), params={` |
+| `get /api/v1/items/{*}` | yes | `tests/api/v1/test_security.py:287:        resp = await client.get(` |
+| `get /api/v1/items/{*}/attributes` | yes | `tests/api/v1/test_regressions.py:230:        list_r = await client.get(f"/api/v1/items/{item['id']}/attributes", headers=auth_header(admin_token))` |
+| `get /api/v1/items/{*}/reviews` | yes | `tests/api/v1/test_reviews.py:125:        resp = await client.get(f"/api/v1/items/{item['id']}/reviews")` |
+| `get /api/v1/reports` | yes | `tests/api/v1/test_coverage.py:1277:        resp = await client.get("/api/v1/reports", headers=auth_header(reviewer_token))` |
+| `get /api/v1/reservations` | yes | `tests/api/v1/test_audit_fixes.py:129:        resp = await client.get(` |
+| `get /api/v1/sessions/me` | yes | `tests/api/v1/test_auth.py:131:        resp2 = await client.get(` |
+| `get /api/v1/share-links/{*}` | yes | `tests/api/v1/test_audit_fixes.py:256:        resp_no = await client.get(f"/api/v1/share-links/{token}")` |
+| `get /api/v1/share-links/{*}/download` | yes | `tests/api/v1/test_audit_fixes.py:308:        resp_no = await client.get(f"/api/v1/share-links/{token}/download")` |
+| `get /api/v1/tags` | yes | `tests/api/v1/test_catalog.py:112:        resp = await client.get("/api/v1/tags")` |
+| `get /api/v1/verification-cases` | yes | `tests/api/v1/test_endpoint_coverage.py:412:        list_resp = await client.get(` |
+| `get /api/v1/verification-cases/{*}` | yes | `tests/api/v1/test_verification.py:249:        resp = await client.get(` |
+| `get /api/v1/verification-cases/{*}/status` | yes | `tests/api/v1/test_verification.py:296:        resp = await client.get(` |
+| `get /api/v1/warehouses` | yes | `tests/api/v1/test_inventory.py:109:        resp = await client.get("/api/v1/warehouses", headers=auth_header(admin_token))` |
+| `patch /api/v1/items/{*}` | yes | `tests/api/v1/test_catalog.py:203:        resp2 = await client.patch(f"/api/v1/items/{item['id']}", headers=auth_header(admin_token), json={` |
+| `patch /api/v1/reviews/{*}` | yes | `tests/api/v1/test_reviews.py:147:        edit_resp = await client.patch(` |
+| `patch /api/v1/skus/{*}` | yes | `tests/api/v1/test_coverage.py:173:        r = await client.patch(f"/api/v1/skus/{sku['id']}", headers=auth_header(admin_token), json={` |
+| `patch /api/v1/verification-cases/{*}` | yes | `tests/api/v1/test_verification.py:29:    resp = await client.patch(` |
+| `post /api/v1/admin/clear-challenge` | yes | `tests/api/v1/test_endpoint_coverage.py:82:        clear_resp = await client.post(` |
+| `post /api/v1/admin/force-logout` | yes | `tests/api/v1/test_auth.py:449:        resp = await client.post(` |
+| `post /api/v1/admin/roles/assign` | yes | `tests/api/v1/test_audit_fixes.py:172:        await client.post(` |
+| `post /api/v1/admin/sensitive-words` | yes | `tests/api/v1/test_reviews.py:53:        sw_resp = await client.post(` |
+| `post /api/v1/appeals` | yes | `tests/api/v1/test_security.py:569:        resp = await client.post(` |
+| `post /api/v1/appeals/{*}/decision` | yes | `tests/api/v1/test_reviews.py:311:        decide_resp = await client.post(` |
+| `post /api/v1/assets/uploads` | yes | `tests/api/v1/test_audit_fixes.py:49:        resp = await client.post("/api/v1/assets/uploads", headers=auth_header(token), json={` |
+| `post /api/v1/assets/uploads/batch-complete` | yes | `tests/api/v1/test_assets.py:154:        resp = await client.post("/api/v1/assets/uploads/batch-complete", headers=headers, json={` |
+| `post /api/v1/assets/uploads/{*}/complete` | yes | `tests/api/v1/test_assets.py:111:        resp4 = await client.post(` |
+| `post /api/v1/assets/{*}/share-links` | yes | `tests/api/v1/test_audit_fixes.py:247:        resp = await client.post(` |
+| `post /api/v1/auth/login` | yes | `tests/conftest.py:145:    resp = await client.post("/api/v1/auth/login", json={` |
+| `post /api/v1/auth/logout` | yes | `tests/api/v1/test_auth.py:125:        resp = await client.post(` |
+| `post /api/v1/auth/logout-all` | yes | `tests/api/v1/test_auth.py:142:        resp = await client.post(` |
+| `post /api/v1/auth/password-rotate` | yes | `tests/api/v1/test_auth.py:166:        resp = await client.post(` |
+| `post /api/v1/auth/register` | yes | `tests/conftest.py:136:    resp = await client.post("/api/v1/auth/register", json={` |
+| `post /api/v1/categories` | yes | `tests/api/v1/test_additions.py:21:        cat_resp = await client.post("/api/v1/categories", headers=auth_header(admin_token), json={` |
+| `post /api/v1/identity-bindings` | yes | `tests/api/v1/test_audit_fixes.py:103:        await client.post(` |
+| `post /api/v1/inbound-docs` | yes | `tests/api/v1/test_security.py:71:    doc_resp = await client.post("/api/v1/inbound-docs", headers=auth_header(admin_token), json={` |
+| `post /api/v1/inbound-docs/{*}/lines` | yes | `tests/api/v1/test_security.py:75:    await client.post(f"/api/v1/inbound-docs/{doc['id']}/lines", headers=auth_header(admin_token), json={` |
+| `post /api/v1/inbound-docs/{*}/post` | yes | `tests/api/v1/test_security.py:78:    await client.post(f"/api/v1/inbound-docs/{doc['id']}/post", headers=auth_header(admin_token))` |
+| `post /api/v1/items` | yes | `tests/api/v1/test_security.py:28:    item_resp = await client.post("/api/v1/items", headers=auth_header(admin_token), json={` |
+| `post /api/v1/items/{*}/attributes` | yes | `tests/api/v1/test_regressions.py:221:        attr_r = await client.post(` |
+| `post /api/v1/items/{*}/media` | yes | `tests/api/v1/test_reviews.py:30:    await client.post(f"/api/v1/items/{item['id']}/media", headers=auth_header(admin_token), json={` |
+| `post /api/v1/items/{*}/publish` | yes | `tests/api/v1/test_security.py:69:    await client.post(f"/api/v1/items/{item['id']}/publish", headers=auth_header(admin_token))` |
+| `post /api/v1/items/{*}/reviews` | yes | `tests/api/v1/test_security.py:485:        resp = await client.post(` |
+| `post /api/v1/items/{*}/tags/{*}` | yes | `tests/api/v1/test_additions.py:37:        add_resp = await client.post(` |
+| `post /api/v1/items/{*}/unpublish` | yes | `tests/api/v1/test_catalog.py:322:        resp = await client.post(` |
+| `post /api/v1/orders` | yes | `tests/api/v1/test_security.py:84:    resp = await client.post("/api/v1/orders", headers=auth_header(token), json={` |
+| `post /api/v1/orders/{*}/cancel` | yes | `tests/api/v1/test_inventory.py:298:        cancel_resp = await client.post(` |
+| `post /api/v1/orders/{*}/deduct` | yes | `tests/api/v1/test_security.py:133:        resp = await client.post(` |
+| `post /api/v1/orders/{*}/reserve` | yes | `tests/api/v1/test_security.py:110:        resp = await client.post(` |
+| `post /api/v1/outbound-docs` | yes | `tests/api/v1/test_coverage_boost.py:291:        resp = await client.post("/api/v1/outbound-docs", headers=auth_header(admin_token), json={` |
+| `post /api/v1/outbound-docs/{*}/lines` | yes | `tests/api/v1/test_coverage.py:323:        line_r = await client.post(f"/api/v1/outbound-docs/{ob['id']}/lines", headers=auth_header(admin_token), json={` |
+| `post /api/v1/outbound-docs/{*}/post` | yes | `tests/api/v1/test_coverage.py:328:        post_r = await client.post(f"/api/v1/outbound-docs/{ob['id']}/post", headers=auth_header(admin_token))` |
+| `post /api/v1/price-books` | yes | `tests/api/v1/test_security.py:48:    pb_resp = await client.post("/api/v1/price-books", headers=auth_header(admin_token), json={` |
+| `post /api/v1/price-books/{*}/entries` | yes | `tests/api/v1/test_reviews.py:39:    await client.post(f"/api/v1/price-books/{pb['id']}/entries", headers=auth_header(admin_token), json={` |
+| `post /api/v1/reports` | yes | `tests/api/v1/test_reviews.py:245:        report_resp = await client.post(` |
+| `post /api/v1/reports/{*}/close` | yes | `tests/api/v1/test_coverage_boost.py:413:        close_resp = await client.post(` |
+| `post /api/v1/reports/{*}/triage` | yes | `tests/api/v1/test_reviews.py:261:        triage_resp = await client.post(` |
+| `post /api/v1/reviews/{*}/moderate` | yes | `tests/api/v1/test_reviews.py:198:        suppress_resp = await client.post(` |
+| `post /api/v1/spus` | yes | `tests/api/v1/test_inventory.py:33:    spu_resp = await client.post("/api/v1/spus", headers=auth_header(admin_token), json={` |
+| `post /api/v1/spus/{*}/skus` | yes | `tests/api/v1/test_security.py:43:    sku_resp = await client.post(f"/api/v1/spus/{spu['id']}/skus", headers=auth_header(admin_token), json={` |
+| `post /api/v1/stocktakes` | yes | `tests/api/v1/test_inventory.py:322:        st_resp = await client.post("/api/v1/stocktakes", headers=auth_header(admin_token), json={` |
+| `post /api/v1/stocktakes/{*}/lines` | yes | `tests/api/v1/test_inventory.py:328:        line_resp = await client.post(f"/api/v1/stocktakes/{st['id']}/lines", headers=auth_header(admin_token), json={` |
+| `post /api/v1/stocktakes/{*}/post` | yes | `tests/api/v1/test_inventory.py:337:        post_resp = await client.post(f"/api/v1/stocktakes/{st['id']}/post", headers=auth_header(admin_token))` |
+| `post /api/v1/tags` | yes | `tests/api/v1/test_additions.py:26:        tag_resp = await client.post("/api/v1/tags", headers=auth_header(admin_token), json={` |
+| `post /api/v1/verification-cases` | yes | `tests/api/v1/test_verification.py:17:    resp = await client.post(` |
+| `post /api/v1/verification-cases/{*}/decision` | yes | `tests/api/v1/test_verification.py:168:        resp = await client.post(` |
+| `post /api/v1/verification-cases/{*}/renew` | yes | `tests/api/v1/test_coverage.py:623:        r = await client.post(` |
+| `post /api/v1/verification-cases/{*}/submit` | yes | `tests/api/v1/test_verification.py:43:    resp2 = await client.post(` |
+| `post /api/v1/verification-cases/{*}/withdraw` | yes | `tests/api/v1/test_verification.py:284:        resp = await client.post(` |
+| `post /api/v1/warehouses` | yes | `tests/api/v1/test_security.py:16:    wh_resp = await client.post("/api/v1/warehouses", headers=auth_header(admin_token), json={` |
+| `put /api/v1/assets/uploads/{*}/parts/{*}` | yes | `tests/api/v1/test_audit_fixes.py:61:        resp2 = await client.put(` |
 ## API Test Classification
 1. True No-Mock HTTP
 - Files: `tests/api/v1/test_auth.py`, `test_assets.py`, `test_catalog.py`, `test_inventory.py`, `test_reviews.py`, `test_verification.py`, `test_security.py`, `test_endpoint_coverage.py`, `test_coverage.py`, `test_coverage_boost.py`, `test_regressions.py`, `test_additions.py`, `test_audit_fixes.py`.
